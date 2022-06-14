@@ -243,48 +243,14 @@ describe('<CFDRealAccountDisplay />', () => {
             residence: 'id',
             residence_list: [
                 {
-                    identity: {
-                        services: {
-                            idv: {
-                                documents_supported: {},
-                                has_visual_sample: 0,
-                                is_country_supported: 0,
-                            },
-                            onfido: {
-                                documents_supported: {
-                                    driving_licence: {
-                                        display_name: 'Driving Licence',
-                                    },
-                                    national_identity_card: {
-                                        display_name: 'National Identity Card',
-                                    },
-                                    passport: {
-                                        display_name: 'Passport',
-                                    },
-                                },
-                                is_country_supported: 1,
-                            },
-                        },
-                    },
+                    identity: {},
                     phone_idd: '62',
                     text: 'Indonesia',
                     tin_format: ['^\\d{15}$'],
                     value: 'id',
                 },
                 {
-                    identity: {
-                        services: {
-                            idv: {
-                                documents_supported: {},
-                                has_visual_sample: 0,
-                                is_country_supported: 0,
-                            },
-                            onfido: {
-                                documents_supported: {},
-                                is_country_supported: 0,
-                            },
-                        },
-                    },
+                    identity: {},
                     phone_idd: '35818',
                     text: 'Aland Islands',
                     value: 'ax',
@@ -307,7 +273,6 @@ describe('<CFDRealAccountDisplay />', () => {
         render(<CFDRealAccountDisplay {...props} />);
 
         const add_real_account_buttons = screen.getAllByRole('button', { name: /add real account/i });
-
         expect(screen.getByTestId('dt_cfd_real_accounts_display')).toBeInTheDocument();
         expect(screen.getByText('Synthetic')).toBeInTheDocument();
         expect(screen.getByText('Financial')).toBeInTheDocument();
@@ -346,7 +311,6 @@ describe('<CFDRealAccountDisplay />', () => {
         render(<CFDRealAccountDisplay {...props} is_eu account_settings={account_settings_eu} />);
 
         const add_real_account_button = screen.getByRole('button', { name: /add real account/i });
-
         expect(screen.getByTestId('dt_cfd_real_accounts_display')).toBeInTheDocument();
         expect(screen.getByText('CFDs')).toBeInTheDocument();
         expect(screen.queryByText('Synthetic')).not.toBeInTheDocument();
@@ -378,7 +342,6 @@ describe('<CFDRealAccountDisplay />', () => {
         const { rerender } = render(<CFDRealAccountDisplay {...props} platform='dxtrade' />);
 
         const add_real_account_buttons = screen.getAllByRole('button', { name: /add real account/i });
-
         expect(screen.getByTestId('dt_cfd_real_accounts_display')).toBeInTheDocument();
         expect(screen.getByText('Synthetic')).toBeInTheDocument();
         expect(screen.getByText('Financial')).toBeInTheDocument();
@@ -409,7 +372,7 @@ describe('<CFDRealAccountDisplay />', () => {
         expect(screen.queryAllByRole('button', { name: /add real account/i }).length).toBe(0);
     });
 
-    it('should render 1 open real financial account with an enabled password reset button, and "Fund transfer" & "Trade on web terminal" buttons', () => {
+    it('should render 1 open account with an enabled password reset button, and "Fund transfer" & "Trade on web terminal" buttons', () => {
         props.current_list['mt5.real.financial@p01_ts01'] = mt5_real_financial_account;
         const { container, rerender } = render(<CFDRealAccountDisplay {...props} has_real_account={true} />);
 
